@@ -20,7 +20,7 @@ const theme = createTheme({
   },
   components: {
     MuiAppBar: {
-      styleOverrides: { root: { borderBottomLeftRadius: 16, borderBottomRightRadius: 16 } }
+      styleOverrides: { root: {  } }
     },
     MuiButton: {
       defaultProps: { variant: 'contained' },
@@ -28,7 +28,35 @@ const theme = createTheme({
     },
     MuiCard: {
       styleOverrides: { root: { borderRadius: 18, boxShadow: '0 10px 24px rgba(0,0,0,.06)' } }
-    }
+    },
+    MuiTabs: {
+      styleOverrides: {
+        indicator: {
+          height: 3,
+          borderRadius: 3,
+        },
+      },
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          fontWeight: 600,
+          minHeight: 0,
+          paddingInline: 20,
+          paddingBlock: 12,
+          color: 'rgba(251,231,188,1)',
+          opacity: 1,
+          '&.Mui-selected': {
+            color: '#ffffff',
+          },
+          '&:hover': {
+            color: '#ffffff',
+            backgroundColor: 'transparent',
+          },
+        },
+      },
+    },
   }
 })
 
