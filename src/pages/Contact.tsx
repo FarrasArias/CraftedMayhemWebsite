@@ -7,7 +7,7 @@ export default function Contact() {
   const [email, setEmail] = React.useState('')
   const [message, setMessage] = React.useState('')
 
-  const mailto = `mailto:hello@craftedmayhem.example?subject=Project inquiry from ${encodeURIComponent(name)}&body=${encodeURIComponent(message + '\n\n' + email)}`
+  const mailto = `mailto:rafael.arias.glez@gmail.com?subject=Project inquiry from ${encodeURIComponent(name)}&body=${encodeURIComponent(message + '\n\n' + email)}`
 
   return (
     <Box>
@@ -19,9 +19,8 @@ export default function Contact() {
           <TextField label="Message" multiline minRows={4} value={message} onChange={(e)=>setMessage(e.target.value)} />
           <Stack direction="row" spacing={2}>
             <Button href={mailto}>Email us</Button>
-            <Button color="secondary" href="https://github.com/new" target="_blank" rel="noreferrer">Start a repo</Button>
+                      {/*<Button color="secondary" href="https://github.com/new" target="_blank" rel="noreferrer">Start a repo</Button>*/}
           </Stack>
-          <Typography variant="body2" color="text.secondary">Replace the email in code with your real address.</Typography>
         </Stack>
       </Paper>
     </Box>

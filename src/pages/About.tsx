@@ -2,18 +2,19 @@
 import * as React from 'react'
 import { Avatar, Box, Grid, Paper, Stack, Typography, Button } from '@mui/material'
 import { team } from '../data/team'
+import { asset } from '../lib/assets'
 
 export default function About() {
   return (
     <Box>
       <Typography variant="h2" gutterBottom>Us</Typography>
-      <Paper sx={{ p: 3, mb: 3 }}>
-        <Typography>
+          {/*<Paper sx={{ p: 3, mb: 3 }}>*/}
+          <Typography sx={{ p: 3, mb: 3 }}>
           We are a studio focused on high-impact software: from full-stack web platforms and data systems to
           interactive 3D experiences and AI-powered products. We partner with startups and research labs to ship
           well-crafted solutions.
         </Typography>
-      </Paper>
+          {/*</Paper>*/}
 
       <Grid container spacing={3} sx={{ mb: 4 }}>
         {[
@@ -38,7 +39,7 @@ export default function About() {
           <Grid key={idx} item xs={12} md={6}>
             <Paper sx={{ p: 3, height: '100%' }}>
               <Stack direction="row" spacing={2} alignItems="center" sx={{ mb: 1 }}>
-                <Avatar src={p.avatar} alt={p.name} sx={{ width: 64, height: 64 }} />
+                        <Avatar src={p.avatar ? asset(p.avatar) : asset('images/placeholder-1.svg')} alt={p.name} sx={{ width: 64, height: 64 }} />
                 <Box>
                   <Typography variant="h5">{p.name}</Typography>
                   <Typography variant="body2" color="text.secondary">{p.role}</Typography>

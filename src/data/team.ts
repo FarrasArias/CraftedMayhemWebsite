@@ -10,18 +10,18 @@ export type Person = {
 
 export const team: Person[] = [
   {
-    name: 'Your Name',
-    role: 'Founder / Full‑Stack',
-    bio: 'Short bio about background and focus. Replace with your own text.',
-    avatar: '/images/placeholder-1.svg',
-    cvUrl: 'https://example.com/your-cv.pdf',
-    links: [{ label: 'GitHub', url: 'https://github.com/yourhandle' }]
+    name: 'Ramis Lao',
+    role: 'Founder / Developer / Designer',
+    bio: 'I design and create playful experiences. Game Dev, Programming, Production, Community Building.',
+    avatar: 'images/ramis_headshot.jpg',
+    links: [{ label: 'LinkedIn', url: 'https://www.linkedin.com/in/ramis-lao/' }]
   },
   {
-    name: 'Teammate Name',
-    role: 'Game Developer',
-    bio: 'Unity, gameplay systems and tools.',
-    avatar: '/images/placeholder-2.svg',
-    links: [{ label: 'LinkedIn', url: 'https://linkedin.com/in/your-handle' }]
+    name: 'Rafael Arias',
+    role: 'Founder / Developer',
+      bio: '10+ years of development experience. 10+ years of teaching experience. I have taught and worked on Game Development, Data Science, Artificial Intelligence, Full-stack development, and Audio.',
+    avatar: 'images/rafa_headshot.jpg',
+      cvUrl: 'documents/RafaelArias_CV_081125.pdf',
+      links: [{ label: 'LinkedIn', url: 'https://www.linkedin.com/in/rafaelariasgonzalez-848528105/' }]
   }
 ]
