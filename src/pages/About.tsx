@@ -16,7 +16,7 @@ export default function About() {
         </Typography>
           {/*</Paper>*/}
 
-      <Grid container spacing={3} sx={{ mb: 4 }}>
+          {/*<Grid container spacing={3} sx={{ mb: 4 }}>
         {[
           { title: 'Values', text: 'Clarity, craft, and curiosity. Ship what matters.' },
           { title: 'What we do', text: 'Product discovery, UI/UX, full-stack development, Unity, ML/AI and data engineering.' },
@@ -31,7 +31,7 @@ export default function About() {
             </Paper>
           </Grid>
         ))}
-      </Grid>
+      </Grid>*/}
 
       <Typography variant="h3" sx={{ mb: 2 }}>Team</Typography>
       <Grid container spacing={3}>
