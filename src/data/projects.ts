@@ -16,6 +16,7 @@ export type Project = {
 
 export const projects: Project[] = [
     {
+        client: 'Crafted Mayhem',
         title: 'Cats Against the Machine',
         year: 'Demo in 2026',
         role: 'Game director',
