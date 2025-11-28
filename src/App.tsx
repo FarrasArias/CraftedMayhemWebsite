@@ -1,9 +1,8 @@
-
 import * as React from 'react'
 import {
-    AppBar, Box, Container, IconButton, Toolbar, Typography,
-    Drawer, List, ListItem, ListItemButton, ListItemText,
-    Tabs, Tab, Stack, Link
+  AppBar, Box, Container, IconButton, Toolbar, Typography,
+  Drawer, List, ListItem, ListItemButton, ListItemText,
+  Tabs, Tab, Stack, Link
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { Link as RouterLink, Routes, Route, useLocation } from 'react-router-dom'
@@ -13,6 +12,7 @@ import Projects from './pages/Projects'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import { asset } from './lib/assets'
+import ScrollToTop from './components/ScrollToTop'   // ⬅️ add this
 
 
 const nav = [
@@ -26,7 +26,6 @@ const nav = [
 function NavTabs() {
   const location = useLocation()
 
-  // If you may have nested routes like /projects/123, use startsWith:
   const active = nav.find(n =>
     n.to === '/'
       ? location.pathname === '/'
@@ -38,9 +37,9 @@ function NavTabs() {
   return (
     <Tabs
       value={value}
-      textColor="inherit"          // keeps using AppBar contrastText
-      indicatorColor="secondary"   // fine; matches your orange underline
-      sx={{ ml: 2 }}               // spacing only; visual styles in theme
+      textColor="inherit"
+      indicatorColor="secondary"
+      sx={{ ml: 2 }}
     >
       {nav.map(n => (
         <Tab
@@ -59,13 +58,16 @@ export default function App() {
   const [open, setOpen] = React.useState(false)
 
   return (
-      <Box
-          sx={{
-              minHeight: '100vh',
-              display: 'flex',
-              flexDirection: 'column',
-          }}
-      >
+    <Box
+      sx={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
+      {/* ⬇️ This runs its effect on every route change */}
+      <ScrollToTop />
+
       <AppBar position="sticky" color="primary" enableColorOnDark>
         <Toolbar sx={{ display: 'flex', gap: 2 }}>
           <Typography
@@ -121,92 +123,91 @@ export default function App() {
         </Box>
       </Drawer>
 
-          <Container sx={{ py: 6, flexGrow: 1 }}>
-              <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/projects" element={<Projects />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/games" element={<Games />} />
-                  <Route path="/contact" element={<Contact />} />
-              </Routes>
-          </Container>
+      <Container sx={{ py: 6, flexGrow: 1 }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/games" element={<Games />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </Container>
 
-            <Box
-                component="footer"
-                sx={{
-                    mt: 'auto',
-                    borderTop: '1px solid',
-                    borderColor: 'divider',
-                    bgcolor: 'grey.50',
-                    py: 4,
-                }}
+      <Box
+        component="footer"
+        sx={{
+          mt: 'auto',
+          borderTop: '1px solid',
+          borderColor: 'divider',
+          bgcolor: 'grey.50',
+          py: 4,
+        }}
+      >
+        <Container
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            alignItems: { xs: 'flex-start', md: 'center' },
+            justifyContent: 'space-between',
+            gap: 2,
+          }}
+        >
+          <Box>
+            <Typography variant="subtitle2" sx={{ fontWeight: 700 }}>
+              Crafted Mayhem Studio
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Apps, games & AI projects crafted with care.
+            </Typography>
+            <Typography
+              variant="caption"
+              color="text.secondary"
+              sx={{ mt: 1, display: 'block' }}
             >
-                <Container
-                    sx={{
-                        display: 'flex',
-                        flexDirection: { xs: 'column', md: 'row' },
-                        alignItems: { xs: 'flex-start', md: 'center' },
-                        justifyContent: 'space-between',
-                        gap: 2,
-                    }}
-                >
-                    <Box>
-                        <Typography variant="subtitle2" sx={{ fontWeight: 700 }}>
-                            Crafted Mayhem Studio
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Apps, games & AI projects crafted with care.
-                        </Typography>
-                        <Typography
-                            variant="caption"
-                            color="text.secondary"
-                            sx={{ mt: 1, display: 'block' }}
-                        >
-                            © {new Date().getFullYear()} Crafted Mayhem Studio. All rights reserved.
-                        </Typography>
-                    </Box>
+              © {new Date().getFullYear()} Crafted Mayhem Studio. All rights reserved.
+            </Typography>
+          </Box>
 
-                    <Stack direction="row" spacing={3} sx={{ flexWrap: 'wrap' }}>
-                        <Link
-                            component={RouterLink}
-                            to="/projects"
-                            underline="hover"
-                            color="inherit"
-                            variant="body2"
-                        >
-                            Projects
-                        </Link>
-                        <Link
-                            component={RouterLink}
-                            to="/games"
-                            underline="hover"
-                            color="inherit"
-                            variant="body2"
-                        >
-                            Games
-                        </Link>
-                        <Link
-                            component={RouterLink}
-                            to="/about"
-                            underline="hover"
-                            color="inherit"
-                            variant="body2"
-                        >
-                            About
-                        </Link>
-                        <Link
-                            component={RouterLink}
-                            to="/contact"
-                            underline="hover"
-                            color="inherit"
-                            variant="body2"
-                        >
-                            Contact
-                        </Link>
-                    </Stack>
-                </Container>
-            </Box>
-        </Box>
-    )
+          <Stack direction="row" spacing={3} sx={{ flexWrap: 'wrap' }}>
+            <Link
+              component={RouterLink}
+              to="/projects"
+              underline="hover"
+              color="inherit"
+              variant="body2"
+            >
+              Projects
+            </Link>
+            <Link
+              component={RouterLink}
+              to="/games"
+              underline="hover"
+              color="inherit"
+              variant="body2"
+            >
+              Games
+            </Link>
+            <Link
+              component={RouterLink}
+              to="/about"
+              underline="hover"
+              color="inherit"
+              variant="body2"
+            >
+              About
+            </Link>
+            <Link
+              component={RouterLink}
+              to="/contact"
+              underline="hover"
+              color="inherit"
+              variant="body2"
+            >
+              Contact
+            </Link>
+          </Stack>
+        </Container>
+      </Box>
+    </Box>
+  )
 }
-    
