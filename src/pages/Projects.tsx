@@ -17,9 +17,15 @@ import {
 import { useLocation } from 'react-router-dom'
 import { projects } from '../data/projects'
 import { asset } from '../lib/assets'
+import { VideoDialog } from '../components/VideoDialog' // <- import the dialog
 
 const primary = '#8714fa'   // purple
 const secondary = '#f07d13' // orange
+
+type ProjectLink = {
+    label: string
+    url: string
+}
 
 export default function Projects() {
     const location = useLocation() as any
@@ -27,6 +33,9 @@ export default function Projects() {
     const [query, setQuery] = React.useState('')
     const [status, setStatus] = React.useState<'all' | 'current' | 'shipped'>('all')
     const [openIndex, setOpenIndex] = React.useState<number | null>(null)
+
+    const [videoUrl, setVideoUrl] = React.useState<string | null>(null)
+    const [videoTitle, setVideoTitle] = React.useState<string | undefined>(undefined)
 
     const filtered = projects.filter((p) => {
         const isGame = p.tags.some((t) => t.toLowerCase() === 'game')
@@ -53,6 +62,22 @@ export default function Projects() {
             setOpenIndex(idx)
         }
     }, [filtered, location.state, openIndex])
+
+    const handleLinkClick = (link: ProjectLink) => {
+        const isVideo = link.label.toLowerCase().includes('video')
+
+        if (isVideo) {
+            setVideoUrl(link.url)
+            setVideoTitle(link.label)
+        } else {
+            window.open(link.url, '_blank', 'noopener,noreferrer')
+        }
+    }
+
+    const handleCloseVideo = () => {
+        setVideoUrl(null)
+        setVideoTitle(undefined)
+    }
 
     return (
         <Box>
@@ -84,6 +109,8 @@ export default function Projects() {
                     const isOpen = openIndex === i
                     const hasDetailsContent = !!p.details || (p.gallery?.length ?? 0) > 0
                     const heroImage = p.image ? asset(p.image) : asset('images/placeholder-1.svg')
+
+                    const primaryLink: ProjectLink | undefined = p.links?.[0]
 
                     return (
                         <Grid key={p.title + i} item xs={12} sm={6} md={4}>
@@ -182,7 +209,7 @@ export default function Projects() {
                                                 spacing={0.5}
                                                 sx={{ flexWrap: 'wrap', gap: 0.5, mb: 1 }}
                                             >
-                                                {p.tags.slice(0, 3).map((t) => (
+                                                {p.tags.slice(0, 3).map((t: string) => (
                                                     <Chip
                                                         key={t}
                                                         label={t}
@@ -256,13 +283,11 @@ export default function Projects() {
                                                         </Button>
                                                     )}
 
-                                                    {/* Optional primary external link, if present */}
-                                                    {p.links && p.links.length > 0 && (
+                                                    {/* Optional primary external link or video */}
+                                                    {primaryLink && (
                                                         <Button
                                                             size="small"
-                                                            href={p.links[0].url}
-                                                            target="_blank"
-                                                            rel="noreferrer"
+                                                            onClick={() => handleLinkClick(primaryLink)}
                                                             sx={{
                                                                 textTransform: 'none',
                                                                 fontSize: 13,
@@ -278,7 +303,7 @@ export default function Projects() {
                                                                 },
                                                             }}
                                                         >
-                                                            {p.links[0].label}
+                                                            {primaryLink.label}
                                                         </Button>
                                                     )}
                                                 </Stack>
@@ -309,7 +334,7 @@ export default function Projects() {
 
                                             {!!p.gallery?.length && (
                                                 <ImageList cols={3} gap={8}>
-                                                    {p.gallery.map((src, idx) => (
+                                                    {p.gallery.map((src: string, idx: number) => (
                                                         <ImageListItem key={idx}>
                                                             <img
                                                                 src={asset(src)}
@@ -335,12 +360,10 @@ export default function Projects() {
                                                     spacing={1}
                                                     sx={{ flexWrap: 'wrap', gap: 1, mt: 1.5 }}
                                                 >
-                                                    {p.links.slice(1).map((link, idx) => (
+                                                    {p.links.slice(1).map((link: ProjectLink, idx: number) => (
                                                         <Button
                                                             key={idx}
-                                                            href={link.url}
-                                                            target="_blank"
-                                                            rel="noreferrer"
+                                                            onClick={() => handleLinkClick(link)}
                                                             size="small"
                                                             sx={{
                                                                 textTransform: 'none',
@@ -362,6 +385,13 @@ export default function Projects() {
                     )
                 })}
             </Grid>
+
+            <VideoDialog
+                open={Boolean(videoUrl)}
+                url={videoUrl}
+                title={videoTitle}
+                onClose={handleCloseVideo}
+            />
         </Box>
     )
 }

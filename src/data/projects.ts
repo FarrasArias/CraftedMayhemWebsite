@@ -120,7 +120,7 @@ export const projects: Project[] = [
         status: 'shipped',
         image: 'images/airtm.png',
         links: [
-            { label: 'Video', url: 'https://app.airtm.com/sign-up' },
+            { label: 'Website', url: 'https://app.airtm.com/sign-up' },
         ],
     },
   
