@@ -25,9 +25,8 @@ export default function Home() {
 
                 <Stack
                     direction="row"
-                    spacing={2}
                     sx={{ mt: 4, flexWrap: 'wrap', gap: 2 }}
-                >
+                    >
                     <Button size="large" component={RouterLink} to="/projects">
                         See our projects
                     </Button>
@@ -35,6 +34,7 @@ export default function Home() {
                         Start a project
                     </Button>
                 </Stack>
+
 
                 <Stack
                     direction="row"
@@ -77,7 +77,7 @@ export default function Home() {
                 </Box>
             </Box>
 
-                        {/* ROW 1: content | Title 1 */}
+            {/* ROW 1: content | Title 1 */}
             <Box
             component="section"
             sx={{
@@ -86,8 +86,13 @@ export default function Home() {
                 bgcolor: 'background.default',
             }}
             >
-                <Grid container spacing={6} alignItems="flex-start">
-                    {/* content (left) */}
+                <Grid
+                    container
+                    spacing={6}
+                    alignItems="flex-start"
+                    direction={{ xs: 'column-reverse', md: 'row' }}
+                >
+                    {/* content (left on desktop, below on mobile) */}
                     <Grid item xs={12} md={7}>
                         <Typography variant="h5" sx={{ mb: 2 }}>
                             Products, platforms, and tools that actually ship.
@@ -104,7 +109,7 @@ export default function Home() {
                         </Typography>
                     </Grid>
 
-                    {/* Title 1 (right) */}
+                    {/* Title 1 (right on desktop, top on mobile) */}
                     <Grid item xs={12} md={5}>
                         <Box
                             sx={{
@@ -160,69 +165,74 @@ export default function Home() {
                 bgcolor: 'background.paper',
             }}
             >
-            <Grid container spacing={6} alignItems="flex-start">
-                {/* Title 2 (left on desktop, top on mobile) */}
-                <Grid item xs={12} md={5}>
-                    <Box
-                        sx={{
-                        position: { md: 'sticky' },
-                        top: { md: 96 },
-                        }}
-                    >
-                        <Box
-                        sx={{
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            mb: 1.5,
-                            gap: 1,
-                        }}
-                        >
+                <Grid
+                    container
+                    spacing={6}
+                    alignItems="flex-start"
+                    direction={{ xs: 'column', md: 'row' }}
+                >
+                    {/* Title 2 (left on desktop, top on mobile) */}
+                    <Grid item xs={12} md={5}>
                         <Box
                             sx={{
-                            width: 24,
-                            height: 2,
-                            borderRadius: 999,
-                            bgcolor: 'secondary.main',
+                            position: { md: 'sticky' },
+                            top: { md: 96 },
                             }}
-                        />
-                        <Typography
-                            variant="overline"
-                            sx={{ letterSpacing: 2, textTransform: 'uppercase' }}
                         >
-                            02
-                        </Typography>
+                            <Box
+                            sx={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                mb: 1.5,
+                                gap: 1,
+                            }}
+                            >
+                            <Box
+                                sx={{
+                                width: 24,
+                                height: 2,
+                                borderRadius: 999,
+                                bgcolor: 'secondary.main',
+                                }}
+                            />
+                            <Typography
+                                variant="overline"
+                                sx={{ letterSpacing: 2, textTransform: 'uppercase' }}
+                            >
+                                02
+                            </Typography>
+                            </Box>
+                            <Typography
+                            variant="h1"
+                            sx={{
+                                fontSize: { xs: '2.25rem', md: '3rem' },
+                                letterSpacing: '-0.04em',
+                                lineHeight: 1.1,
+                            }}
+                            >
+                            How we work
+                            </Typography>
                         </Box>
-                        <Typography
-                        variant="h1"
-                        sx={{
-                            fontSize: { xs: '2.25rem', md: '3rem' },
-                            letterSpacing: '-0.04em',
-                            lineHeight: 1.1,
-                        }}
-                        >
-                        How we work
-                        </Typography>
-                    </Box>
-                </Grid>
+                    </Grid>
 
-                {/* content (right on desktop, below on mobile) */}
-                <Grid item xs={12} md={7}>
-                    <Typography color="text.secondary" sx={{ mb: 2 }}>
-                        <strong>Small, senior teams.</strong> You work directly with the people
-                        designing and building your product. No telephone game, no mystery layers.
-                    </Typography>
-                    <Typography color="text.secondary" sx={{ mb: 2 }}>
-                        <strong>Short, focused cycles.</strong> We slice work into shippable
-                        pieces, share progress often, and invite feedback early, so nothing goes
-                        off the rails quietly.
-                    </Typography>
-                    <Typography color="text.secondary">
-                        <strong>Real-world constraints.</strong> We design around your stack,
-                        your deadlines, and your users’ reality. We care about maintainability,
-                        performance, and the stories people tell after launch.
-                    </Typography>
+                    {/* content (right on desktop, below on mobile) */}
+                    <Grid item xs={12} md={7}>
+                        <Typography color="text.secondary" sx={{ mb: 2 }}>
+                            <strong>Small, senior teams.</strong> You work directly with the people
+                            designing and building your product. No telephone game, no mystery layers.
+                        </Typography>
+                        <Typography color="text.secondary" sx={{ mb: 2 }}>
+                            <strong>Short, focused cycles.</strong> We slice work into shippable
+                            pieces, share progress often, and invite feedback early, so nothing goes
+                            off the rails quietly.
+                        </Typography>
+                        <Typography color="text.secondary">
+                            <strong>Real-world constraints.</strong> We design around your stack,
+                            your deadlines, and your users’ reality. We care about maintainability,
+                            performance, and the stories people tell after launch.
+                        </Typography>
+                    </Grid>
                 </Grid>
-            </Grid>
             </Box>
 
             {/* ROW 3: content | Title 3 */}
@@ -233,8 +243,13 @@ export default function Home() {
                 bgcolor: 'background.default',
             }}
             >
-                <Grid container spacing={6} alignItems="flex-start">
-                    {/* content (left) */}
+                <Grid
+                    container
+                    spacing={6}
+                    alignItems="flex-start"
+                    direction={{ xs: 'column-reverse', md: 'row' }}
+                >
+                    {/* content (left on desktop, below on mobile) */}
                     <Grid item xs={12} md={7}>
                         <Typography color="text.secondary" sx={{ mb: 3, maxWidth: 720 }}>
                             We&apos;ve worked on client platforms, internal tools, public games,
@@ -274,7 +289,7 @@ export default function Home() {
                         </Stack>
                     </Grid>
 
-                    {/* Title 3 (right) */}
+                    {/* Title 3 (right on desktop, top on mobile) */}
                     <Grid item xs={12} md={5}>
                         <Box
                             sx={{
@@ -320,6 +335,7 @@ export default function Home() {
                     </Grid>
                 </Grid>
             </Box>
+
         </Box>
     )
 }
