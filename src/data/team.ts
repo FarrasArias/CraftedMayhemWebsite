@@ -23,5 +23,13 @@ export const team: Person[] = [
     avatar: 'images/rafa_headshot.jpg',
       cvUrl: 'documents/RafaelArias_CV_081125.pdf',
       links: [{ label: 'LinkedIn', url: 'https://www.linkedin.com/in/rafaelariasgonzalez-848528105/' }]
-  }
+    },
+    {
+        name: 'Sarah Grommelt',
+        role: 'Founder / Full Stack Developer',
+        bio: 'I enjoy tackling new challenges in programming that demand ingenious solutions, constantly seeking opportunities to apply my technical and creative skills in innovative environments.',
+        avatar: 'images/sarah_headshot.jpg',
+        //cvUrl: 'documents/RafaelArias_CV_081125.pdf',
+        links: [{ label: 'LinkedIn', url: 'https://www.linkedin.com/in/sarahgrommelt/' }]
+    }
 ]

@@ -60,7 +60,7 @@ export const projects: Project[] = [
         summary: 'Internal platform for managing users, devices, games and QA tools; reward codes, game variable state save/restore, and automations to optimize QA workflows.',
         tags: ['Web', 'Admin', 'QA', 'Automation', 'Rewards'],
         status: 'shipped',
-        image: 'images/hyperbeard.png',
+        image: 'images/hyperbeard.gif',
         links: [
             { label: 'Video', url: 'https://www.youtube.com/watch?v=jg1zoCG5wBg' },
         ],
@@ -75,9 +75,9 @@ export const projects: Project[] = [
     summary: 'Real‑time architectural visualization web app; explore, customize and tour future homes in‑browser. Easily adaptable to new models, materials and furniture.',
     tags: ['Web', '3D', 'Configurator'],
     status: 'shipped',
-    image: 'images/kambio.png',
+    image: 'images/kambio.gif',
     links: [
-        { label: 'Site', url: 'https://www.youtube.com/watch?v=T402YGcUt_Y' },
+        { label: 'Video', url: 'https://www.youtube.com/watch?v=T402YGcUt_Y' },
     ],
   },
   {
@@ -89,7 +89,7 @@ export const projects: Project[] = [
     summary: 'Mobile training app for amateur footballers; ML posture detection via phone camera, performance comparison to pros, leaderboard, and metrics like vertical jump and reaction time.',
     tags: ['Mobile', 'ML', 'Computer Vision'],
     status: 'shipped',
-      image: 'images/marakana.png',
+      image: 'images/marakana.gif',
       links: [
           { label: 'Video', url: 'https://www.youtube.com/watch?v=o_8BXjnw_ow' },
       ],  
@@ -105,8 +105,8 @@ export const projects: Project[] = [
     tags: ['Unity', 'Hardware', 'CV', 'Expo'],
     status: 'shipped',
       image: 'images/hannover.png',
-    //gallery: ['images/placeholder-1.svg','images/placeholder-2.svg'],
-    //details: 'Extended info about HyperCheats: architecture, stack, and outcomes. Replace this with your own copy.'
+    gallery: ['images/placeholder-1.svg','images/placeholder-2.svg'],
+    details: 'Extended info about HyperCheats: architecture, stack, and outcomes. Replace this with your own copy.'
     },
     {
 

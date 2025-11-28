@@ -1,8 +1,9 @@
 
 import * as React from 'react'
 import {
-  AppBar, Box, Container, IconButton, Toolbar, Typography,
-  Drawer, List, ListItem, ListItemButton, ListItemText, Tabs, Tab
+    AppBar, Box, Container, IconButton, Toolbar, Typography,
+    Drawer, List, ListItem, ListItemButton, ListItemText,
+    Tabs, Tab, Stack, Link
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { Link as RouterLink, Routes, Route, useLocation } from 'react-router-dom'
@@ -18,7 +19,7 @@ const nav = [
   { label: 'Home', to: '/' },
   { label: 'Projects', to: '/projects' },
   { label: 'Games', to: '/games' },
-  { label: 'Us', to: '/about' },
+  { label: 'About', to: '/about' },
   { label: 'Contact', to: '/contact' },
 ]
 
@@ -58,7 +59,13 @@ export default function App() {
   const [open, setOpen] = React.useState(false)
 
   return (
-    <Box>
+      <Box
+          sx={{
+              minHeight: '100vh',
+              display: 'flex',
+              flexDirection: 'column',
+          }}
+      >
       <AppBar position="sticky" color="primary" enableColorOnDark>
         <Toolbar sx={{ display: 'flex', gap: 2 }}>
           <Typography
@@ -114,19 +121,92 @@ export default function App() {
         </Box>
       </Drawer>
 
-      <Container sx={{ py: 6 }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/games" element={<Games />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </Container>
+          <Container sx={{ py: 6, flexGrow: 1 }}>
+              <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/projects" element={<Projects />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/games" element={<Games />} />
+                  <Route path="/contact" element={<Contact />} />
+              </Routes>
+          </Container>
 
-      <Box component="footer" sx={{ borderTop: '1px solid rgba(0,0,0,.08)', py: 4, textAlign: 'center', color: 'text.secondary' }}>
-        <Typography variant="body2">© {new Date().getFullYear()} Crafted Mayhem Studio. All rights reserved.</Typography>
-      </Box>
-    </Box>
-  )
+            <Box
+                component="footer"
+                sx={{
+                    mt: 'auto',
+                    borderTop: '1px solid',
+                    borderColor: 'divider',
+                    bgcolor: 'grey.50',
+                    py: 4,
+                }}
+            >
+                <Container
+                    sx={{
+                        display: 'flex',
+                        flexDirection: { xs: 'column', md: 'row' },
+                        alignItems: { xs: 'flex-start', md: 'center' },
+                        justifyContent: 'space-between',
+                        gap: 2,
+                    }}
+                >
+                    <Box>
+                        <Typography variant="subtitle2" sx={{ fontWeight: 700 }}>
+                            Crafted Mayhem Studio
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                            Apps, games & AI projects crafted with care.
+                        </Typography>
+                        <Typography
+                            variant="caption"
+                            color="text.secondary"
+                            sx={{ mt: 1, display: 'block' }}
+                        >
+                            © {new Date().getFullYear()} Crafted Mayhem Studio. All rights reserved.
+                        </Typography>
+                    </Box>
+
+                    <Stack direction="row" spacing={3} sx={{ flexWrap: 'wrap' }}>
+                        <Link
+                            component={RouterLink}
+                            to="/projects"
+                            underline="hover"
+                            color="inherit"
+                            variant="body2"
+                        >
+                            Projects
+                        </Link>
+                        <Link
+                            component={RouterLink}
+                            to="/games"
+                            underline="hover"
+                            color="inherit"
+                            variant="body2"
+                        >
+                            Games
+                        </Link>
+                        <Link
+                            component={RouterLink}
+                            to="/about"
+                            underline="hover"
+                            color="inherit"
+                            variant="body2"
+                        >
+                            About
+                        </Link>
+                        <Link
+                            component={RouterLink}
+                            to="/contact"
+                            underline="hover"
+                            color="inherit"
+                            variant="body2"
+                        >
+                            Contact
+                        </Link>
+                    </Stack>
+                </Container>
+            </Box>
+        </Box>
+    )
 }
+    
