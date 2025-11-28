@@ -227,7 +227,7 @@ export const ProjectTile: React.FC<ProjectTileProps> = ({
                                             },
                                         }}
                                     >
-                                        {isOpen ? 'Hide details' : 'Details'}
+                                        {isOpen ? 'Hide' : 'Details'}
                                     </Button>
                                 )}
 
@@ -242,12 +242,11 @@ export const ProjectTile: React.FC<ProjectTileProps> = ({
                                             borderRadius: 999,
                                             px: 1.6,
                                             py: 0.3,
-                                            border: '1px solid rgba(255,255,255,0.7)',
-                                            bgcolor: 'rgba(10,5,25,0.4)',
-                                            color: '#ffffff',
+                                            boxShadow: 'none',
+                                            bgcolor: primary,
                                             '&:hover': {
-                                                bgcolor: 'rgba(240,125,19,0.9)',
-                                                borderColor: 'transparent',
+                                                bgcolor: '#6a0fd1',
+                                                boxShadow: '0 0 0 1px rgba(255,255,255,0.6)',
                                             },
                                         }}
                                     >
