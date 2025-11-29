@@ -57,7 +57,7 @@ export const projects: Project[] = [
         year: '2023–2024',
         duration: '8 months',
         //role: 'UI/UX design & Full‑Stack',
-        summary: 'Internal platform for managing users, devices, games, and QA tools; creating reward codes; saving/restoring game variable state; and optimizing QA workflows with automations.', tags: ['Web', 'Admin', 'QA', 'Automation', 'Rewards'],
+        summary: 'Internal platform for managing users, devices, games, and QA tools; creating reward codes; saving/restoring game variable state; and optimizing QA workflows with automations.',
         tags: ['Unity', 'Web App', 'UI/UX'],
         status: 'shipped',
         image: 'images/hyperbeard.gif',
@@ -120,7 +120,7 @@ export const projects: Project[] = [
         status: 'shipped',
         image: 'images/airtm.png',
         links: [
-            { label: 'Website', url: 'https://app.airtm.com/sign-up' },
+            { title: "Combine", label: 'Website', url: 'https://app.airtm.com/sign-up' },
         ],
     },
   
