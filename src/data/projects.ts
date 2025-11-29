@@ -11,7 +11,7 @@ export type Project = {
     image?: string
     gallery?: string[]
     details?: string
-    links?: { titel: string, label: string; url: string }[]   
+    links?: { title: string, label: string; url: string }[]   
 }
 
 export const projects: Project[] = [
