@@ -33,7 +33,7 @@ export const projects: Project[] = [
         summary: 'End‑to‑end platform for management and control of AI models; front‑end and back‑end contributions for a robust user experience and efficient AI operations.',
         tags: ['AI', 'Full Stack'],
         status: 'current',
-        image: 'images/ai4all.png',
+        image: 'images/ai4all.gif',
         //gallery: ['images/placeholder-3.svg'],
         //details: 'Extended info for the project. Replace with your own copy.'
     },
