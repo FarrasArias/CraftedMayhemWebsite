@@ -75,7 +75,7 @@ export const projects: Project[] = [
     summary: 'Real‑time architectural visualization web app; explore, customize and tour future homes in‑browser. Easily adaptable to new models, materials and furniture.',
     tags: ['Web', '3D', 'Configurator'],
     status: 'shipped',
-    image: 'images/kambio.gif',
+    image: 'images/kambio2.gif',
     links: [
         { label: 'Video', url: 'https://www.youtube.com/watch?v=T402YGcUt_Y' },
     ],
@@ -89,7 +89,7 @@ export const projects: Project[] = [
     summary: 'Mobile training app for amateur footballers; ML posture detection via phone camera, performance comparison to pros, leaderboard, and metrics like vertical jump and reaction time.',
     tags: ['Mobile', 'ML', 'Computer Vision'],
     status: 'shipped',
-      image: 'images/marakana.gif',
+      image: 'images/marakana2.gif',
       links: [
           { label: 'Video', url: 'https://www.youtube.com/watch?v=o_8BXjnw_ow' },
       ],  
