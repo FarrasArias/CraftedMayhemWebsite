@@ -17,6 +17,7 @@ const secondary = '#f07d13' // orange (not used yet, but kept for consistency)
 
 export type ProjectLink = {
     label: string
+    title: string
     url: string
 }
 
@@ -69,8 +70,8 @@ export const ProjectTile: React.FC<ProjectTileProps> = ({
                     borderRadius: 3,
                     overflow: 'hidden',
                     bgcolor: 'grey.50',
-                    border: '1px solid',
-                    borderColor: 'rgba(135,20,250,0.18)',
+                    border: '6px solid',
+                    borderColor: 'rgba(242, 240, 235,1)',
                     boxShadow: '0 8px 24px rgba(15,23,42,0.08)',
                     transition:
                         'transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color 0.2s ease-out',

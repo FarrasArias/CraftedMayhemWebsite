@@ -35,24 +35,23 @@ export default function Home() {
                     </Button>
                 </Stack>
 
-
-                <Stack
-                    direction="row"
-                    spacing={1}
-                    sx={{ mt: 3, flexWrap: 'wrap', gap: 1 }}
-                >
-                    <Chip label="Web" />
-                    <Chip label="Unity" />
-                    <Chip label="AI" />
-                    <Chip label="Data" />
-                </Stack>
-
                 <Box sx={{ mt: 4 }}>
                     <Grid container spacing={3} alignItems="center">
                         <Grid item xs={12} md={7}>
                             <Typography variant="h6" color="text.secondary" sx={{ maxWidth: 800 }}>
-                                We’re a creative studio obsessed with the craft of building full-stack products, interactive experiences, and machine-learning–powered tools.
+                                We’re a creative studio passionate about building full-stack products, interactive experiences, and machine-learning–powered tools.
                             </Typography>
+                            <Stack
+                                direction="row"
+                                spacing={1}
+                                sx={{ mt: 3, flexWrap: 'wrap', gap: 1 }}
+                            >
+                                <Chip label="Web" />
+                                <Chip label="Games" />
+                                <Chip label="AI" />
+                                <Chip label="Data" />
+                                <Chip label="3D" />
+                            </Stack>
                         </Grid>
                         <Grid item xs={12} md={5}>
                             <Box
@@ -75,6 +74,7 @@ export default function Home() {
                         </Grid>
                     </Grid>
                 </Box>
+
             </Box>
 
             {/* ROW 1: content | Title 1 */}
@@ -219,7 +219,7 @@ export default function Home() {
                     <Grid item xs={12} md={7}>
                         <Typography color="text.secondary" sx={{ mb: 2 }}>
                             <strong>Small, senior teams.</strong> You work directly with the people
-                            designing and building your product. No telephone game, no mystery layers.
+                            designing and building your product. You will receive personalized, direct service.
                         </Typography>
                         <Typography color="text.secondary" sx={{ mb: 2 }}>
                             <strong>Short, focused cycles.</strong> We slice work into shippable
@@ -251,10 +251,17 @@ export default function Home() {
                 >
                     {/* content (left on desktop, below on mobile) */}
                     <Grid item xs={12} md={7}>
+                        <Typography variant="h5" sx={{ mb: 2 }}>
+                            We’re driven by a mix of curiosity and craft.                         </Typography>
                         <Typography color="text.secondary" sx={{ mb: 3, maxWidth: 720 }}>
-                            We&apos;ve worked on client platforms, internal tools, public games,
-                            interactive experiments, and AI interfaces. A mix of “serious” and
-                            “playful” is where we’re happiest.
+                            A balance of “serious” and “playful” is where we
+                            do our best work: serious about reliability, quality, and outcomes; playful in how we explore ideas and
+                            experiment with interactions.
+                        </Typography>
+                        <Typography color="text.secondary" sx={{ mb: 3, maxWidth: 720 }}>
+                            We care about the tiny moments most teams skip over because those are the things people
+                            actually remember - that one microinteraction, the loading state. We do this because we enjoy
+                            building beautiful projects with people who care as much as we do.
                         </Typography>
 
                         <Stack
@@ -329,7 +336,7 @@ export default function Home() {
                                 lineHeight: 1.1,
                             }}
                             >
-                            Selected work
+                            Why we do it
                             </Typography>
                         </Box>
                     </Grid>

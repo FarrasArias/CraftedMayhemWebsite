@@ -7,14 +7,14 @@ import { asset } from '../lib/assets'
 export default function About() {
   return (
     <Box>
-      <Typography variant="h2" gutterBottom>About Us</Typography>
+          {/*<Typography variant="h2" gutterBottom>About Us</Typography>
           <Typography sx={{ mb: 3 }}>
-          We are a studio focused on high-impact software: from full-stack web platforms and data systems to
+          We are a creative studio focused on : from full-stack web platforms and data systems to
           interactive 3D experiences and AI-powered products. We partner with startups and research labs to ship
           well-crafted solutions.
-        </Typography>
+        </Typography>*/}
 
-      <Typography variant="h3" sx={{ mb: 2 }}>Team</Typography>
+      <Typography variant="h2" sx={{ mb: 2 }}>Our Team</Typography>
       <Grid container spacing={3}>
         {team.map((p, idx) => (
           <Grid key={idx} item xs={12} md={6}>

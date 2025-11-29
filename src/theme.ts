@@ -1,4 +1,4 @@
-
+﻿
 import { createTheme } from '@mui/material/styles'
 
 const primary = '#8714fa' // purple
@@ -24,7 +24,20 @@ const theme = createTheme({
     },
     MuiButton: {
       defaultProps: { variant: 'contained' },
-      styleOverrides: { root: { textTransform: 'none', borderRadius: 14, paddingInline: 18, paddingBlock: 10 } }
+        styleOverrides: {
+            root: {
+                textTransform: 'none',
+                borderRadius: 14,
+                paddingInline: 18,
+                paddingBlock: 10,
+                boxShadow: 'none',         
+                '&:hover': {
+                    boxShadow: 'none',      
+                },
+                '&:active': {
+                    boxShadow: 'none',     
+                },
+            }, }
     },
     MuiCard: {
       styleOverrides: { root: { borderRadius: 18, boxShadow: '0 10px 24px rgba(0,0,0,.06)' } }

@@ -54,7 +54,7 @@ export default function Projects() {
 
         if (isVideo) {
             setVideoUrl(link.url)
-            setVideoTitle(link.label)
+            setVideoTitle(link.title)
         } else {
             window.open(link.url, '_blank', 'noopener,noreferrer')
         }
