@@ -63,13 +63,13 @@ export const ProjectTile: React.FC<ProjectTileProps> = ({
 
     return (
         <Box>
-            {/* Square image tile with hover overlay */}
+            {/* Square image tile with static bottom stripe + hover overlay */}
             <Box
                 sx={{
                     position: 'relative',
                     borderRadius: 3,
                     overflow: 'hidden',
-                    bgcolor: 'grey.50',
+                    bgcolor: '#ffffff',
                     border: '6px solid',
                     borderColor: 'rgba(242, 240, 235,1)',
                     boxShadow: '0 8px 24px rgba(15,23,42,0.08)',
@@ -89,6 +89,7 @@ export const ProjectTile: React.FC<ProjectTileProps> = ({
             >
                 {/* Keep this 1:1 aspect ratio for square tiles */}
                 <Box sx={{ position: 'relative', width: '100%', pt: '100%' }}>
+                    {/* Background image */}
                     <Box
                         component="img"
                         src={heroImage}
@@ -102,7 +103,96 @@ export const ProjectTile: React.FC<ProjectTileProps> = ({
                         }}
                     />
 
-                    {/* Hover overlay */}
+                    {/* Gradient mask so the bottom of the image is always white
+              (prevents tiny halo between image and stripe at rounded corners) */}
+                    <Box
+                        sx={{
+                            position: 'absolute',
+                            bottom: -5,
+                            inset: 0,
+                            pointerEvents: 'none',
+                            background:
+                                'linear-gradient(to top, #ffffff 0px, #ffffff 60px, transparent 1px)',
+                        }}
+                    />
+
+                    {/* Persistent bottom white stripe with title + tags */}
+                    <Box
+                        sx={{
+                            position: 'absolute',
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            bgcolor: 'rgba(255,255,255,0.98)',
+                            px: 2,
+                            py: 1.8, // bigger stripe
+                            minHeight: 72,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: 0.75,
+                            borderTop: '1px solid rgba(15,23,42,0.18)', // clearer separation line
+                            boxShadow: '0 -1px 0 rgba(15,23,42,0.08)',
+                            backdropFilter: 'blur(4px)',
+                        }}
+                    >
+                        <Typography
+                            variant="subtitle1"
+                            sx={{
+                                fontWeight: 700,
+                                letterSpacing: '-0.02em',
+                                whiteSpace: 'nowrap',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                fontSize: 15, // slightly larger title
+                                lineHeight: 1.25,
+                            }}
+                        >
+                            {project.title}
+                        </Typography>
+
+                        {project.tags?.length > 0 && (
+                            <Stack
+                                direction="row"
+                                spacing={0.5}
+                                sx={{ flexWrap: 'wrap', gap: 0.5 }}
+                            >
+                                {project.tags.slice(0, 3).map((t) => (
+                                    <Chip
+                                        key={t}
+                                        label={t}
+                                        size="small"
+                                        sx={{
+                                            borderRadius: 999,
+                                            px: 0.5,
+                                            bgcolor: 'rgba(135,20,250,0.06)',
+                                            color: 'rgba(17,24,39,0.9)',
+                                            fontSize: 11,
+                                            height: 22,
+                                        }}
+                                    />
+                                ))}
+                                {project.tags.length > 3 && (
+                                    <Chip
+                                        label={`+${project.tags.length - 3}`}
+                                        size="small"
+                                        sx={{
+                                            borderRadius: 999,
+                                            px: 0.5,
+                                            borderColor: 'rgba(15,23,42,0.16)',
+                                            borderWidth: 1,
+                                            borderStyle: 'dashed',
+                                            bgcolor: 'rgba(255,255,255,0.9)',
+                                            color: 'rgba(31,41,55,0.8)',
+                                            fontSize: 11,
+                                            height: 22,
+                                        }}
+                                    />
+                                )}
+                            </Stack>
+                        )}
+                    </Box>
+
+                    {/* Hover overlay: full fade to white with structured info */}
                     <Box
                         className="project-tile-overlay"
                         sx={{
@@ -110,90 +200,74 @@ export const ProjectTile: React.FC<ProjectTileProps> = ({
                             inset: 0,
                             display: 'flex',
                             flexDirection: 'column',
-                            justifyContent: 'flex-end',
+                            justifyContent: 'space-between',
                             p: 2.5,
-                            background:
-                                'linear-gradient(to top, rgba(10,5,25,0.9), rgba(10,5,25,0.15))',
-                            color: '#ffffff',
+                            bgcolor: 'rgba(255,255,255,0.98)',
+                            color: 'text.primary',
                             opacity: 0,
-                            transform: 'translateY(12px)',
+                            transform: 'translateY(8px)',
                             transition: 'opacity 0.25s ease-out, transform 0.25s ease-out',
                         }}
                     >
-                        <Typography
-                            variant="overline"
-                            sx={{
-                                letterSpacing: '0.12em',
-                                textTransform: 'uppercase',
-                                opacity: 0.9,
-                            }}
-                        >
-                            {project.client || 'Studio project'}
-                        </Typography>
+                        <Box sx={{ mb: 1.5 }}>
+                            <Typography
+                                variant="overline"
+                                sx={{
+                                    letterSpacing: '0.12em',
+                                    textTransform: 'uppercase',
+                                    opacity: 0.7,
+                                    display: 'block',
+                                    mb: 0.5,
+                                }}
+                            >
+                                {project.client || 'Studio project'}
+                            </Typography>
 
-                        <Typography
-                            variant="h5"
-                            sx={{ fontWeight: 700, lineHeight: 1.2, mb: 0.5 }}
-                        >
-                            {project.title}
-                        </Typography>
+                            <Typography
+                                variant="h5"
+                                sx={{ fontWeight: 700, lineHeight: 1.2, mb: 1 }}
+                            >
+                                {project.title}
+                            </Typography>
 
-                        {/* Summary – increased height via WebkitLineClamp */}
-                        <Typography
-                            variant="body2"
-                            sx={{
-                                opacity: 0.9,
-                                mb: 1,
-                                display: '-webkit-box',
-                                WebkitLineClamp: 6, // was 3 – now allows more lines
-                                WebkitBoxOrient: 'vertical',
-                                overflow: 'hidden',
-                            }}
-                        >
-                            {project.summary}
-                        </Typography>
+                            <Typography
+                                variant="body2"
+                                sx={{
+                                    opacity: 0.85,
+                                    mb: 1.5,
+                                    display: '-webkit-box',
+                                    WebkitLineClamp: 5,
+                                    WebkitBoxOrient: 'vertical',
+                                    overflow: 'hidden',
+                                }}
+                            >
+                                {project.summary}
+                            </Typography>
 
-                        <Stack
-                            direction="row"
-                            spacing={0.5}
-                            sx={{ flexWrap: 'wrap', gap: 0.5, mb: 1 }}
-                        >
-                            {project.tags.slice(0, 3).map((t) => (
-                                <Chip
-                                    key={t}
-                                    label={t}
-                                    size="small"
-                                    sx={{
-                                        borderRadius: 999,
-                                        px: 0.5,
-                                        borderColor: 'rgba(255,255,255,0.45)',
-                                        borderWidth: 1,
-                                        borderStyle: 'solid',
-                                        bgcolor: 'rgba(15,23,42,0.6)',
-                                        color: 'rgba(255,255,255,0.95)',
-                                        fontSize: 11,
-                                        height: 22,
-                                    }}
-                                />
-                            ))}
-                            {project.tags.length > 3 && (
-                                <Chip
-                                    label={`+${project.tags.length - 3}`}
-                                    size="small"
-                                    sx={{
-                                        borderRadius: 999,
-                                        px: 0.5,
-                                        borderColor: 'rgba(255,255,255,0.3)',
-                                        borderWidth: 1,
-                                        borderStyle: 'dashed',
-                                        bgcolor: 'rgba(15,23,42,0.4)',
-                                        color: 'rgba(255,255,255,0.9)',
-                                        fontSize: 11,
-                                        height: 22,
-                                    }}
-                                />
+                            {project.tags?.length > 0 && (
+                                <Stack
+                                    direction="row"
+                                    spacing={0.5}
+                                    sx={{ flexWrap: 'wrap', gap: 0.5 }}
+                                >
+                                    {project.tags.map((t) => (
+                                        <Chip
+                                            key={t}
+                                            label={t}
+                                            size="small"
+                                            sx={{
+                                                borderRadius: 999,
+                                                px: 0.5,
+                                                bgcolor: 'rgba(135,20,250,0.06)',
+                                                color: 'rgba(17,24,39,0.9)',
+                                                fontSize: 11,
+                                                height: 22,
+                                            }}
+                                        />
+                                    ))}
+                                </Stack>
                             )}
-                        </Stack>
+                        </Box>
 
                         <Stack
                             direction="row"
@@ -201,7 +275,7 @@ export const ProjectTile: React.FC<ProjectTileProps> = ({
                             justifyContent="space-between"
                             spacing={1}
                         >
-                            <Typography variant="caption" sx={{ opacity: 0.85 }}>
+                            <Typography variant="caption" sx={{ opacity: 0.75 }}>
                                 {project.year}
                                 {project.duration ? ` · ${project.duration}` : ''}
                                 {project.role ? ` · ${project.role}` : ''}
@@ -224,7 +298,6 @@ export const ProjectTile: React.FC<ProjectTileProps> = ({
                                             bgcolor: primary,
                                             '&:hover': {
                                                 bgcolor: '#6a0fd1',
-                                                boxShadow: '0 0 0 1px rgba(255,255,255,0.6)',
                                             },
                                         }}
                                     >
@@ -247,7 +320,6 @@ export const ProjectTile: React.FC<ProjectTileProps> = ({
                                             bgcolor: primary,
                                             '&:hover': {
                                                 bgcolor: '#6a0fd1',
-                                                boxShadow: '0 0 0 1px rgba(255,255,255,0.6)',
                                             },
                                         }}
                                     >

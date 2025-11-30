@@ -71,6 +71,7 @@ export default function Games() {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     size="small"
+                    sx={{ maxWidth: 260 }} // tweak this number until it visually matches Projects
                 />
             </Stack>
 
