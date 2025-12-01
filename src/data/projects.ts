@@ -38,7 +38,7 @@ export const projects: Project[] = [
         //details: 'Extended info for the project. Replace with your own copy.'
     },
     {
-        client: 'Barely Alive Studio',
+        client: 'Crafted Mayhem',
         title: 'Party Demon',
         year: '2023–2025',
         duration: '18 months',
@@ -46,7 +46,7 @@ export const projects: Project[] = [
         summary: 'Tower defense with deck‑building mechanics for PC. Uses a card deck to deploy traps and real‑time strategies against waves of enemies; co‑developed with Barely Alive Studio.',
         tags: ['Game', 'Unity', '2D'],
         status: 'current',
-        image: 'images/party_demon.jpg',
+        image: 'images/party_demon.gif',
         links: [
             { title: "Party Demon", label: 'Steam', url: 'https://store.steampowered.com/app/1659530/Party_Demon/' },
         ],
