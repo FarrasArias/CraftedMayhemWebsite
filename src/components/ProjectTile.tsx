@@ -9,6 +9,7 @@ import {
     Paper,
     Stack,
     Typography,
+    CircularProgress,  
 } from '@mui/material'
 import { asset } from '../lib/assets'
 
@@ -53,6 +54,8 @@ export const ProjectTile: React.FC<ProjectTileProps> = ({
     const hasDetailsContent = !!project.details || (project.gallery?.length ?? 0) > 0
     const primaryLink: ProjectLink | undefined = project.links?.[0]
 
+    const [heroLoaded, setHeroLoaded] = React.useState(false) 
+
     const handleLinkClick = (link: ProjectLink) => {
         if (onLinkClick) {
             onLinkClick(link)
@@ -89,19 +92,39 @@ export const ProjectTile: React.FC<ProjectTileProps> = ({
             >
                 {/* Keep this 1:1 aspect ratio for square tiles */}
                 <Box sx={{ position: 'relative', width: '100%', pt: '100%' }}>
-                    {/* Background image */}
+                    {/* Background image with fade-in once loaded */}
                     <Box
                         component="img"
                         src={heroImage}
                         alt={project.title}
+                        onLoad={() => setHeroLoaded(true)}
+                        onError={() => setHeroLoaded(true)} // in case of error, hide loader too
                         sx={{
                             position: 'absolute',
                             inset: 0,
                             width: '100%',
                             height: '100%',
                             objectFit: 'cover',
+                            opacity: heroLoaded ? 1 : 0,
+                            transition: 'opacity 0.3s ease-out',
                         }}
                     />
+
+                    {/* Loading overlay */}
+                    {!heroLoaded && (
+                        <Box
+                            sx={{
+                                position: 'absolute',
+                                inset: 0,
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                bgcolor: 'rgba(248,250,252,0.8)', // soft wash so the loading state feels intentional
+                            }}
+                        >
+                            <CircularProgress size={32} />
+                        </Box>
+                    )}
 
                     {/* Gradient mask so the bottom of the image is always white
               (prevents tiny halo between image and stripe at rounded corners) */}
