@@ -41,6 +41,16 @@ export interface ProjectTileProps {
     onLinkClick?: (link: ProjectLink) => void
 }
 
+const mediaSx = (loaded: boolean) => ({
+    position: 'absolute',
+    inset: 0,
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    opacity: loaded ? 1 : 0,
+    transition: 'opacity 0.3s ease-out',
+}) as const
+
 const pillButton = {
     fontSize: 12,
     px: 1.5,
@@ -55,6 +65,7 @@ export const ProjectTile: React.FC<ProjectTileProps> = ({
     onLinkClick,
 }) => {
     const heroImage = project.image ? asset(project.image) : asset('images/placeholder-1.svg')
+    const isVideo = /\.(mp4|webm)(\?|$)/i.test(heroImage)
     const hasDetailsContent = !!project.details || (project.gallery?.length ?? 0) > 0
     const primaryLink: ProjectLink | undefined = project.links?.[0]
 
@@ -90,22 +101,29 @@ export const ProjectTile: React.FC<ProjectTileProps> = ({
             >
                 {/* Keep this 1:1 aspect ratio for square tiles */}
                 <Box sx={{ position: 'relative', width: '100%', pt: '100%' }}>
-                    <Box
-                        component="img"
-                        src={heroImage}
-                        alt={project.title}
-                        onLoad={() => setHeroLoaded(true)}
-                        onError={() => setHeroLoaded(true)}
-                        sx={{
-                            position: 'absolute',
-                            inset: 0,
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'cover',
-                            opacity: heroLoaded ? 1 : 0,
-                            transition: 'opacity 0.3s ease-out',
-                        }}
-                    />
+                    {isVideo ? (
+                        <Box
+                            component="video"
+                            src={heroImage}
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            aria-label={project.title}
+                            onLoadedData={() => setHeroLoaded(true)}
+                            onError={() => setHeroLoaded(true)}
+                            sx={mediaSx(heroLoaded)}
+                        />
+                    ) : (
+                        <Box
+                            component="img"
+                            src={heroImage}
+                            alt={project.title}
+                            onLoad={() => setHeroLoaded(true)}
+                            onError={() => setHeroLoaded(true)}
+                            sx={mediaSx(heroLoaded)}
+                        />
+                    )}
 
                     {!heroLoaded && (
                         <Box

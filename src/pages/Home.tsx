@@ -14,8 +14,10 @@ import { LogoSymbol } from '../components/Logo'
 import { colors, fonts } from '../brand'
 import { projects, isGame } from '../data/projects'
 import { ProjectTile } from '../components/ProjectTile'
+import FeaturedGame from '../components/FeaturedGame'
 
 const games = projects.filter(isGame)
+const featured = projects.find((p) => p.featured)
 
 const values = [
     { label: 'design-driven', Icon: EditOutlined },
@@ -143,6 +145,9 @@ export default function Home() {
                     </Grid>
                 </Grid>
             </Section>
+
+            {/* FEATURED: the next release, with a Steam wishlist call to action */}
+            {featured && <FeaturedGame game={featured} />}
 
             {/* GAMES: we're a game studio first, so they come straight after the hero */}
             <Section tone="snow">

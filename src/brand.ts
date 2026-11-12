@@ -28,8 +28,11 @@ export const fonts = {
     mono: `'Departure Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace`,
 } as const
 
+/** Our Steam developer (curator) page, where players can follow the studio. */
+export const steamDeveloperUrl = 'https://store.steampowered.com/curator/45798588'
+
 export const social = [
-    { label: 'website', handle: 'craftedmayhem.studio', url: 'https://craftedmayhem.studio' },
+    { label: 'steam', handle: 'Crafted Mayhem', url: steamDeveloperUrl },
     { label: 'bluesky', handle: '@craftedmayhem.bsky.social', url: 'https://bsky.app/profile/craftedmayhem.bsky.social' },
     { label: 'instagram', handle: '@crafted.mayhem', url: 'https://www.instagram.com/crafted.mayhem' },
     { label: 'linkedin', handle: '@crafted-mayhem', url: 'https://www.linkedin.com/company/crafted-mayhem' },

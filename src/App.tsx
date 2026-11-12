@@ -12,6 +12,7 @@ import Games from './pages/Games'
 import Projects from './pages/Projects'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import NotFound from './pages/NotFound'
 import ScrollToTop from './components/ScrollToTop'
 import Logo, { LogoSymbol } from './components/Logo'
 import SocialLinks from './components/SocialLinks'
@@ -122,6 +123,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/games" element={<Games />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Box>
 

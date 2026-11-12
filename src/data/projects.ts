@@ -9,6 +9,10 @@ export type Project = {
     tags: string[]
     status?: 'current' | 'shipped'
     image?: string
+    /** Shown in the "wishlist now" band on Home */
+    featured?: boolean
+    /** Wide key art with the logo, used by the featured game band on Home */
+    keyArt?: string
     gallery?: string[]
     details?: string
     links?: { title: string, label: string; url: string }[]   
@@ -24,20 +28,25 @@ export const projects: Project[] = [
         summary: 'A cozy corner idler built to be your daily desktop companion. Help Kes search for and photograph 175+ bugs across 7 floating islands while you work, study, or relax, and upgrade your camera gear to complete the collection.',
         tags: ['Game', '2D', 'Cozy', 'Idler'],
         status: 'current',
-        // Steam header capsule, hotlinked from Steam's CDN; swap for a local image in public/images if preferred
-        image: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5523830/935444f6544ab396630f94791fa67e2283b4396c/header.jpg',
+        featured: true,
+        // Gameplay loop and key art, hotlinked from Steam's CDN
+        image: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5523830/extras/0896b0d206ee492312a2ea0a7926e657.mp4',
+        keyArt: 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/5523830/f524c15a988d51034509913e674a9b3a8f983382/capsule_616x353.jpg',
         links: [
-            { title: 'Shutterbug Skies: Idle Camping', label: 'Steam', url: 'https://store.steampowered.com/app/5523830/Shutterbug_Skies_Idle_Camping/' },
+            { title: 'Shutterbug Skies: Idle Camping', label: 'Wishlist', url: 'https://store.steampowered.com/app/5523830/Shutterbug_Skies_Idle_Camping/' },
         ],
     },
     {
-        // Placeholder card: fill in client, summary, tags, image and links
+        client: 'Yanga Casting',
         title: 'Yanga',
-        year: 'Current',
-        summary: 'Project details coming soon.',
-        tags: ['Industry'],
+        year: '2025–2026',
+        summary: 'A web app built from scratch for a casting agency: one fast, streamlined platform to manage talent, agencies, castings and bookings.',
+        tags: ['Casting', 'Web App', 'UI/UX'],
         status: 'current',
-        image: 'images/placeholder-2.svg',
+        // Screens from the app's public pages; swap for a screen recording (.mp4) once it launches
+        image: 'images/yanga.jpg',
+        // Not live yet. Add a link here once it launches:
+        // links: [{ title: 'Yanga', label: 'Website', url: 'https://yangacasting.mx/' }],
     },
     {
         client: 'iVizLab',

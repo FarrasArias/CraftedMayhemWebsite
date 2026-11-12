@@ -23,7 +23,7 @@ npm run dev
    It publishes `dist/` to the `gh-pages` branch.
 
 ### Custom domain
-- Add your `CNAME` file to `public/` or to the root of the gh-pages branch.
+- `public/CNAME` holds `www.craftedmayhem.studio`, so every deploy keeps the custom domain.
 
 ## Structure
 - `src/pages/*`: Home, Projects (with filter), Games, About, Contact.
@@ -31,7 +31,9 @@ npm run dev
 - Brand colours, fonts and social links live in `src/brand.ts`; `src/theme.ts` applies them to Material UI.
 
 ## Notes
-- HashRouter prevents 404s on GitHub Pages.
+- Clean URLs (`/games`, not `/#/games`). The build copies `index.html` into a folder per route and to `404.html` (see `vite.config.ts`); add new routes to the `routes` list there. Old `/#/...` links are redirected in `src/main.tsx`.
+- The contact form posts to Formspree once `FORMSPREE_ID` is set in `src/pages/Contact.tsx`; until then it opens the visitor's email app.
+- Link previews use `public/images/og-image.png` (1200x630) and the Open Graph tags in `index.html`.
 - Lighthouse-friendly: responsive, accessible contrast, semantic headings.
 
 

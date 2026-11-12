@@ -17,7 +17,7 @@ export function LogoSymbol({ size = 28, title }: { size?: number; title?: string
             <path
                 fill="currentColor"
                 fillRule="evenodd"
-                d="M50 4 L96 50 L50 96 L4 50 Z M50 36 A14 14 0 1 0 50 64 A14 14 0 1 0 50 36 Z"
+                d="M50 4 L96 50 L50 96 L4 50 Z M50 33.7 A16.3 16.3 0 1 0 50 66.3 A16.3 16.3 0 1 0 50 33.7 Z"
             />
         </svg>
     )
