@@ -1,15 +1,15 @@
 import * as React from 'react'
 import {
-    Box,
     Grid,
     Stack,
     TextField,
     Typography,
 } from '@mui/material'
 import { useLocation } from 'react-router-dom'
-import { projects } from '../data/projects'
+import { projects, isGame } from '../data/projects'
 import { VideoDialog } from '../components/VideoDialog'
 import { ProjectTile, ProjectLink } from '../components/ProjectTile'
+import { Section, SectionLabel } from '../components/Section'
 
 export default function Games() {
     const location = useLocation() as any
@@ -21,9 +21,7 @@ export default function Games() {
     const [videoTitle, setVideoTitle] = React.useState<string | undefined>(undefined)
 
     const filtered = projects
-        .filter((p) =>
-            p.tags.map((t) => t.toLowerCase()).includes('game')
-        )
+        .filter(isGame)
         .filter((p) =>
             [p.title, p.client, p.summary, p.tags.join(' ')]
                 .join(' ')
@@ -60,9 +58,13 @@ export default function Games() {
     }
 
     return (
-        <Box>
-            <Typography variant="h2" gutterBottom>
+        <Section tone="snow" size="md">
+            <SectionLabel>games</SectionLabel>
+            <Typography variant="h1" component="h1" sx={{ mb: 2 }}>
                 Games
+            </Typography>
+            <Typography sx={{ color: 'text.secondary', maxWidth: 560, mb: 5 }}>
+                Our own games and game projects: playful, systemic, a little chaotic.
             </Typography>
 
             <Stack sx={{ mb: 3 }}>
@@ -71,7 +73,7 @@ export default function Games() {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     size="small"
-                    sx={{ maxWidth: 260 }} // tweak this number until it visually matches Projects
+                    sx={{ maxWidth: 260 }}
                 />
             </Stack>
 
@@ -104,6 +106,6 @@ export default function Games() {
                 title={videoTitle}
                 onClose={handleCloseVideo}
             />
-        </Box>
+        </Section>
     )
 }

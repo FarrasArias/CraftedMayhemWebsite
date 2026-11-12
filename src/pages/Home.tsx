@@ -1,348 +1,303 @@
 // src/pages/Home.tsx
 import * as React from 'react'
-import { Box, Button, Chip, Grid, Stack, Typography } from '@mui/material'
+import { Box, Button, Grid, Stack, Typography } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
+import EditOutlined from '@mui/icons-material/EditOutlined'
+import ShareOutlined from '@mui/icons-material/ShareOutlined'
+import LightbulbOutlined from '@mui/icons-material/LightbulbOutlined'
+import BuildOutlined from '@mui/icons-material/BuildOutlined'
+import SentimentSatisfiedAltOutlined from '@mui/icons-material/SentimentSatisfiedAltOutlined'
+import MusicNoteOutlined from '@mui/icons-material/MusicNoteOutlined'
+import CheckCircleOutline from '@mui/icons-material/CheckCircleOutline'
+import { Section, SectionLabel, useTone } from '../components/Section'
+import { LogoSymbol } from '../components/Logo'
+import { colors, fonts } from '../brand'
+import { projects, isGame } from '../data/projects'
+import { ProjectTile } from '../components/ProjectTile'
+
+const games = projects.filter(isGame)
+
+const values = [
+    { label: 'design-driven', Icon: EditOutlined },
+    { label: 'systems thinking', Icon: ShareOutlined },
+    { label: 'creativity', Icon: LightbulbOutlined },
+    { label: 'ethical tech', Icon: BuildOutlined },
+    { label: 'human-centered', Icon: SentimentSatisfiedAltOutlined },
+    { label: 'interactive arts', Icon: MusicNoteOutlined },
+]
+
+const services = [
+    'Video games and immersive 3D experiences',
+    'UX/UI, creative direction, and rapid prototyping',
+    'Web and mobile products, full-stack builds',
+    'Creative computing and procedural generation',
+    'Dashboards and internal tools',
+]
+
+const workingStyle = [
+    {
+        title: 'Small, senior teams.',
+        body: 'You work directly with the people designing and building your product. You will receive personalized, direct service.',
+    },
+    {
+        title: 'Short, focused cycles.',
+        body: 'We slice work into shippable pieces, share progress often, and invite feedback early, so nothing goes off the rails quietly.',
+    },
+    {
+        title: 'Real-world constraints.',
+        body: 'We design around your stack, your deadlines, and your users’ reality. We care about maintainability, performance, and the stories people tell after launch.',
+    },
+]
+
+const voice = [
+    {
+        label: 'playful',
+        body: 'Our voice leans into curiosity, color, and a sense of joy, inviting people to explore complex ideas in a light, accessible way that still feels smart and intentional.',
+    },
+    {
+        label: 'inspiring',
+        body: 'Our words spark imagination and courage, encouraging others to experiment, break molds, and see what’s possible when creativity and engineering collide.',
+    },
+    {
+        label: 'authentic',
+        body: 'We speak honestly, grounding even our wildest ideas in real human stories, lived experience, and a genuine respect for the people we’re creating with and for.',
+    },
+]
+
+/** Large statement paragraph used on the walnut bands. */
+function Statement({ children }: { children: React.ReactNode }) {
+    return (
+        <Typography
+            sx={{
+                fontSize: { xs: '1.35rem', md: '1.75rem' },
+                lineHeight: 1.3,
+                letterSpacing: '-0.025em',
+                maxWidth: 820,
+                '& + &': { mt: 3 },
+            }}
+        >
+            {children}
+        </Typography>
+    )
+}
+
+function Muted({ children, sx }: { children: React.ReactNode; sx?: object }) {
+    const t = useTone()
+    return <Typography sx={{ color: t.muted, ...sx }}>{children}</Typography>
+}
 
 export default function Home() {
+    const [openGame, setOpenGame] = React.useState<number | null>(null)
+
     return (
         <Box>
-            {/* HERO */}
-            <Box
-                component="section"
-                sx={{
-                    mb: 8,
-                    p: { xs: 4, md: 8 },
-                    borderRadius: 4,
-                    background:
-                        'linear-gradient(135deg, rgba(135,20,250,.08), rgba(240,125,19,.08))',
-                }}
-            >
-                <Typography variant="h1" gutterBottom>
-                    We craft delightful <span style={{ color: '#8714fa' }}>apps</span>, bold{' '}
-                    <span style={{ color: '#f07d13' }}>games</span>, and humane{' '}
-                    <span style={{ color: '#8714fa' }}>AI</span>.
-                </Typography>
-
-                <Stack
-                    direction="row"
-                    sx={{ mt: 4, flexWrap: 'wrap', gap: 2 }}
-                    >
-                    <Button size="large" component={RouterLink} to="/projects">
-                        See our projects
-                    </Button>
-                    <Button size="large" color="secondary" component={RouterLink} to="/contact">
-                        Start a project
-                    </Button>
-                </Stack>
-
-                <Box sx={{ mt: 4 }}>
-                    <Grid container spacing={3} alignItems="center">
-                        <Grid item xs={12} md={7}>
-                            <Typography variant="h6" color="text.secondary" sx={{ maxWidth: 800 }}>
-                                We’re a creative studio passionate about building full-stack products, interactive experiences, and machine-learning–powered tools.
-                            </Typography>
-                            <Stack
-                                direction="row"
-                                spacing={1}
-                                sx={{ mt: 3, flexWrap: 'wrap', gap: 1 }}
-                            >
-                                <Chip label="Web" />
-                                <Chip label="Games" />
-                                <Chip label="AI" />
-                                <Chip label="Data" />
-                                <Chip label="3D" />
-                            </Stack>
-                        </Grid>
-                        <Grid item xs={12} md={5}>
-                            <Box
-                                sx={{
-                                    display: 'flex',
-                                    justifyContent: { xs: 'flex-start', md: 'flex-end' },
-                                    mt: { xs: 2, md: 0 },
-                                }}
-                            >
-                                <Box
-                                    component="img"
-                                    src="images/logo_no_bg.png"
-                                    alt="Crafted Mayhem logo"
-                                    sx={{
-                                        maxWidth: { xs: 160, md: 220 },
-                                        height: 'auto',
-                                    }}
-                                />
-                            </Box>
-                        </Grid>
-                    </Grid>
-                </Box>
-
-            </Box>
-
-            {/* ROW 1: content | Title 1 */}
-            <Box
-            component="section"
-            sx={{
-                py: { xs: 6, md: 10 },
-                borderBottom: '1px solid rgba(0,0,0,0.04)',
-                bgcolor: 'background.default',
-            }}
-            >
-                <Grid
-                    container
-                    spacing={6}
-                    alignItems="flex-start"
-                    direction={{ xs: 'column-reverse', md: 'row' }}
-                >
-                    {/* content (left on desktop, below on mobile) */}
-                    <Grid item xs={12} md={7}>
-                        <Typography variant="h5" sx={{ mb: 2 }}>
-                            Products, platforms, and tools that actually ship.
+            {/* HERO: mirrors the guide's cover slide */}
+            <Section tone="onyx" sx={{ py: { xs: 10, md: 16 } }}>
+                <Grid container spacing={6} alignItems="center">
+                    <Grid item xs={12} md={8}>
+                        <Typography variant="overline" component="p" sx={{ color: colors.grey2, mb: 2 }}>
+                            A human-first studio
                         </Typography>
-                        <Typography color="text.secondary" sx={{ mb: 2 }}>
-                            We partner with teams to design and build full-stack products: web apps,
-                            internal tools, data-heavy dashboards, and the glue that keeps everything
-                            talking to each other.
-                        </Typography>
-                        <Typography color="text.secondary">
-                            From first whiteboard doodles to production deployments, we cover product
-                            thinking, UX, engineering, and polish. We like projects that are a little
-                            weird, technically interesting, or where the “feel” really matters.
-                        </Typography>
-                    </Grid>
-
-                    {/* Title 1 (right on desktop, top on mobile) */}
-                    <Grid item xs={12} md={5}>
-                        <Box
+                        <Typography
+                            component="h1"
                             sx={{
-                            position: { md: 'sticky' },
-                            top: { md: 96 },
-                            textAlign: { xs: 'left', md: 'right' },
+                                fontWeight: 600,
+                                fontSize: { xs: '3.25rem', sm: '4.5rem', md: '6rem' },
+                                letterSpacing: '-0.055em',
+                                lineHeight: 0.95,
                             }}
                         >
-                            <Box
-                            sx={{
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                mb: 1.5,
-                                gap: 1,
-                            }}
-                            >
-                            <Box
-                                sx={{
-                                width: 24,
-                                height: 2,
-                                borderRadius: 999,
-                                bgcolor: 'primary.main',
-                                }}
-                            />
-                            <Typography
-                                variant="overline"
-                                sx={{ letterSpacing: 2, textTransform: 'uppercase' }}
-                            >
-                                01
-                            </Typography>
-                            </Box>
-                            <Typography
-                            variant="h1"
-                            sx={{
-                                fontSize: { xs: '2.25rem', md: '3rem' },
-                                letterSpacing: '-0.04em',
-                                lineHeight: 1.1,
-                            }}
-                            >
-                            What we do
-                            </Typography>
-                        </Box>
-                    </Grid>
-                </Grid>
-            </Box>
-
-            {/* ROW 2: Title 2 | content */}
-            <Box
-            component="section"
-            sx={{
-                py: { xs: 6, md: 10 },
-                borderBottom: '1px solid rgba(0,0,0,0.04)',
-                bgcolor: 'background.paper',
-            }}
-            >
-                <Grid
-                    container
-                    spacing={6}
-                    alignItems="flex-start"
-                    direction={{ xs: 'column', md: 'row' }}
-                >
-                    {/* Title 2 (left on desktop, top on mobile) */}
-                    <Grid item xs={12} md={5}>
-                        <Box
-                            sx={{
-                            position: { md: 'sticky' },
-                            top: { md: 96 },
-                            }}
+                            Crafted Mayhem
+                        </Typography>
+                        <Typography
+                            variant="overline"
+                            component="p"
+                            sx={{ color: colors.flame, mt: 3, ml: { md: '45%' }, maxWidth: 360 }}
                         >
-                            <Box
-                            sx={{
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                mb: 1.5,
-                                gap: 1,
-                            }}
-                            >
-                            <Box
-                                sx={{
-                                width: 24,
-                                height: 2,
-                                borderRadius: 999,
-                                bgcolor: 'secondary.main',
-                                }}
-                            />
-                            <Typography
-                                variant="overline"
-                                sx={{ letterSpacing: 2, textTransform: 'uppercase' }}
-                            >
-                                02
-                            </Typography>
-                            </Box>
-                            <Typography
-                            variant="h1"
-                            sx={{
-                                fontSize: { xs: '2.25rem', md: '3rem' },
-                                letterSpacing: '-0.04em',
-                                lineHeight: 1.1,
-                            }}
-                            >
-                            How we work
-                            </Typography>
-                        </Box>
-                    </Grid>
-
-                    {/* content (right on desktop, below on mobile) */}
-                    <Grid item xs={12} md={7}>
-                        <Typography color="text.secondary" sx={{ mb: 2 }}>
-                            <strong>Small, senior teams.</strong> You work directly with the people
-                            designing and building your product. You will receive personalized, direct service.
-                        </Typography>
-                        <Typography color="text.secondary" sx={{ mb: 2 }}>
-                            <strong>Short, focused cycles.</strong> We slice work into shippable
-                            pieces, share progress often, and invite feedback early, so nothing goes
-                            off the rails quietly.
-                        </Typography>
-                        <Typography color="text.secondary">
-                            <strong>Real-world constraints.</strong> We design around your stack,
-                            your deadlines, and your users’ reality. We care about maintainability,
-                            performance, and the stories people tell after launch.
-                        </Typography>
-                    </Grid>
-                </Grid>
-            </Box>
-
-            {/* ROW 3: content | Title 3 */}
-            <Box
-            component="section"
-            sx={{
-                py: { xs: 6, md: 10 },
-                bgcolor: 'background.default',
-            }}
-            >
-                <Grid
-                    container
-                    spacing={6}
-                    alignItems="flex-start"
-                    direction={{ xs: 'column-reverse', md: 'row' }}
-                >
-                    {/* content (left on desktop, below on mobile) */}
-                    <Grid item xs={12} md={7}>
-                        <Typography variant="h5" sx={{ mb: 2 }}>
-                            We’re driven by a mix of curiosity and craft.                         </Typography>
-                        <Typography color="text.secondary" sx={{ mb: 3, maxWidth: 720 }}>
-                            A balance of “serious” and “playful” is where we
-                            do our best work: serious about reliability, quality, and outcomes; playful in how we explore ideas and
-                            experiment with interactions.
-                        </Typography>
-                        <Typography color="text.secondary" sx={{ mb: 3, maxWidth: 720 }}>
-                            We care about the tiny moments most teams skip over because those are the things people
-                            actually remember - that one microinteraction, the loading state. We do this because we enjoy
-                            building beautiful projects with people who care as much as we do.
+                            games, interactive experiences &amp; web products
                         </Typography>
 
-                        <Stack
-                            direction={{ xs: 'column', sm: 'row' }}
-                            spacing={2}
-                            sx={{ flexWrap: 'wrap', gap: 2 }}
-                        >
-                            <Button
-                            size="large"
-                            color="primary"
-                            component={RouterLink}
-                            to="/projects"
-                            >
-                            See client projects
+                        <Stack direction="row" sx={{ mt: 6, flexWrap: 'wrap', gap: 2 }}>
+                            <Button size="large" component={RouterLink} to="/games">
+                                See our games
                             </Button>
                             <Button
-                            size="large"
-                            color="secondary"
-                            component={RouterLink}
-                            to="/games"
+                                size="large"
+                                variant="outlined"
+                                component={RouterLink}
+                                to="/contact"
+                                sx={{
+                                    color: colors.snow,
+                                    borderColor: colors.snow,
+                                    '&:hover': { borderColor: colors.flame, color: colors.flame, bgcolor: 'transparent' },
+                                }}
                             >
-                            See our games
-                            </Button>
-                            <Button
-                            size="large"
-                            variant="text"
-                            component={RouterLink}
-                            to="/about"
-                            >
-                            Meet the team
+                                Start a project
                             </Button>
                         </Stack>
                     </Grid>
-
-                    {/* Title 3 (right on desktop, top on mobile) */}
-                    <Grid item xs={12} md={5}>
-                        <Box
-                            sx={{
-                            position: { md: 'sticky' },
-                            top: { md: 96 },
-                            textAlign: { xs: 'left', md: 'right' },
-                            }}
-                        >
-                            <Box
-                            sx={{
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                mb: 1.5,
-                                gap: 1,
-                            }}
-                            >
-                            <Box
-                                sx={{
-                                width: 24,
-                                height: 2,
-                                borderRadius: 999,
-                                bgcolor: 'text.primary',
-                                }}
-                            />
-                            <Typography
-                                variant="overline"
-                                sx={{ letterSpacing: 2, textTransform: 'uppercase' }}
-                            >
-                                03
-                            </Typography>
-                            </Box>
-                            <Typography
-                            variant="h1"
-                            sx={{
-                                fontSize: { xs: '2.25rem', md: '3rem' },
-                                letterSpacing: '-0.04em',
-                                lineHeight: 1.1,
-                            }}
-                            >
-                            Why we do it
-                            </Typography>
+                    <Grid item xs={12} md={4} sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
+                        <Box sx={{ color: colors.snow }}>
+                            <LogoSymbol size={200} />
                         </Box>
                     </Grid>
                 </Grid>
-            </Box>
+            </Section>
 
+            {/* GAMES: we're a game studio first, so they come straight after the hero */}
+            <Section tone="snow">
+                <SectionLabel index="01">Our games</SectionLabel>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        alignItems: 'flex-end',
+                        justifyContent: 'space-between',
+                        gap: 2,
+                        mb: { xs: 4, md: 6 },
+                    }}
+                >
+                    <Typography variant="h2" component="h2" sx={{ maxWidth: 640 }}>
+                        A game studio first.
+                    </Typography>
+                    <Button variant="text" component={RouterLink} to="/games" sx={{ color: colors.onyx, '&:hover': { color: colors.flame, bgcolor: 'transparent' } }}>
+                        All games →
+                    </Button>
+                </Box>
+                <Grid container spacing={3}>
+                    {games.map((g, i) => (
+                        <Grid key={g.title} item xs={12} sm={6} md={4}>
+                            <ProjectTile
+                                project={{ ...g, client: g.client || 'Game project' }}
+                                isOpen={openGame === i}
+                                onToggleOpen={() => setOpenGame(openGame === i ? null : i)}
+                            />
+                        </Grid>
+                    ))}
+                </Grid>
+            </Section>
+
+            {/* INTRODUCTION */}
+            <Section tone="walnut">
+                <SectionLabel index="02">Introduction</SectionLabel>
+                <Statement>
+                    We are a creative studio dedicated to solving thoughtful, unconventional problems by
+                    pairing strong technical craft with a deep appreciation for aesthetics and emotion.
+                </Statement>
+                <Statement>
+                    Human experience sits at the core of everything we design, guiding our decisions and
+                    shaping the stories we tell. We take risks, challenge ourselves, and intentionally step
+                    beyond what feels safe to create work that feels both original and deeply resonant.
+                </Statement>
+            </Section>
+
+            {/* VALUES */}
+            <Section tone="navy">
+                <SectionLabel index="03">Brand values</SectionLabel>
+                <Grid container rowSpacing={6} columnSpacing={4}>
+                    {values.map(({ label, Icon }) => (
+                        <Grid key={label} item xs={6} md={4}>
+                            <Icon sx={{ fontSize: 20, color: colors.flame, mb: 1, display: 'block' }} />
+                            <Typography
+                                sx={{
+                                    fontFamily: fonts.mono,
+                                    fontSize: { xs: '1rem', md: '1.375rem' },
+                                    color: colors.gold,
+                                }}
+                            >
+                                {label}
+                            </Typography>
+                        </Grid>
+                    ))}
+                </Grid>
+            </Section>
+
+            {/* SERVICES */}
+            <Section tone="frozen">
+                <SectionLabel index="04">Key services</SectionLabel>
+                <Grid container rowSpacing={5} columnSpacing={6}>
+                    {services.map((s) => (
+                        <Grid key={s} item xs={12} sm={6}>
+                            <CheckCircleOutline sx={{ fontSize: 18, mb: 1, display: 'block', opacity: 0.8 }} />
+                            <Typography variant="h4" component="h3" sx={{ maxWidth: 420 }}>
+                                {s}
+                            </Typography>
+                        </Grid>
+                    ))}
+                </Grid>
+            </Section>
+
+            {/* MISSION & VISION */}
+            <Section tone="walnut">
+                <SectionLabel index="05">Mission &amp; vision</SectionLabel>
+                <Statement>
+                    Crafted Mayhem honors the human experience and imagination through play, crafting
+                    joyful, mold-breaking experiences that spark emotion and inspire others.
+                </Statement>
+                <Statement>
+                    We believe in making bold choices, experimentation, exploration, playfulness, and
+                    collaboration.
+                </Statement>
+                <Statement>
+                    Think of us as a colorful Escher painting: we approach complex problems with systematic
+                    thinking fused with divergent creativity.
+                </Statement>
+            </Section>
+
+            {/* HOW WE WORK */}
+            <Section tone="snow">
+                <SectionLabel index="06">How we work</SectionLabel>
+                <Grid container spacing={6}>
+                    {workingStyle.map((w) => (
+                        <Grid key={w.title} item xs={12} md={4}>
+                            <Typography variant="h4" component="h3" sx={{ mb: 2 }}>
+                                {w.title}
+                            </Typography>
+                            <Muted>{w.body}</Muted>
+                        </Grid>
+                    ))}
+                </Grid>
+            </Section>
+
+            {/* VOICE + CTA */}
+            <Section tone="onyx">
+                <SectionLabel index="07">How we show up</SectionLabel>
+                <Grid container spacing={6}>
+                    {voice.map((v) => (
+                        <Grid key={v.label} item xs={12} md={4}>
+                            <Typography
+                                sx={{ fontFamily: fonts.mono, fontSize: '1.375rem', color: colors.frozen, mb: 2 }}
+                            >
+                                {v.label}
+                            </Typography>
+                            <Muted sx={{ fontSize: '0.95rem', maxWidth: 340 }}>{v.body}</Muted>
+                        </Grid>
+                    ))}
+                </Grid>
+
+                <Stack direction={{ xs: 'column', sm: 'row' }} sx={{ mt: { xs: 8, md: 12 }, gap: 2 }}>
+                    <Button size="large" component={RouterLink} to="/games">
+                        See our games
+                    </Button>
+                    <Button
+                        size="large"
+                        component={RouterLink}
+                        to="/projects"
+                        sx={{ bgcolor: colors.frozen, color: colors.navy, '&:hover': { bgcolor: colors.snow } }}
+                    >
+                        See client projects
+                    </Button>
+                    <Button
+                        size="large"
+                        variant="text"
+                        component={RouterLink}
+                        to="/about"
+                        sx={{ color: colors.snow, '&:hover': { color: colors.flame, bgcolor: 'transparent' } }}
+                    >
+                        Meet the team →
+                    </Button>
+                </Stack>
+            </Section>
         </Box>
     )
 }

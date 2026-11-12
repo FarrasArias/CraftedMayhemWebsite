@@ -1,6 +1,5 @@
 import * as React from 'react'
 import {
-    Box,
     Grid,
     Stack,
     TextField,
@@ -9,9 +8,10 @@ import {
     Typography,
 } from '@mui/material'
 import { useLocation } from 'react-router-dom'
-import { projects } from '../data/projects'
+import { projects, isGame } from '../data/projects'
 import { VideoDialog } from '../components/VideoDialog'
 import { ProjectTile, ProjectLink } from '../components/ProjectTile'
+import { Section, SectionLabel } from '../components/Section'
 
 export default function Projects() {
     const location = useLocation() as any
@@ -24,8 +24,7 @@ export default function Projects() {
     const [videoTitle, setVideoTitle] = React.useState<string | undefined>(undefined)
 
     const filtered = projects.filter((p) => {
-        const isGame = p.tags.some((t) => t.toLowerCase() === 'game')
-        if (isGame) return false // don't show Game-tagged items in Projects
+        if (isGame(p)) return false // games live on the Games page
 
         const matchesText = [p.title, p.client, p.summary, p.tags.join(' ')]
             .join(' ')
@@ -66,12 +65,16 @@ export default function Projects() {
     }
 
     return (
-        <Box>
-            <Typography variant="h2" gutterBottom>
+        <Section tone="snow" size="md">
+            <SectionLabel>projects</SectionLabel>
+            <Typography variant="h1" component="h1" sx={{ mb: 2 }}>
                 Projects
             </Typography>
+            <Typography sx={{ color: 'text.secondary', maxWidth: 560, mb: 5 }}>
+                Client work across web, data and interactive installations.
+            </Typography>
 
-            <Stack direction="row" spacing={2} sx={{ mb: 3, flexWrap: 'wrap', gap: 2 }}>
+            <Stack direction="row" sx={{ mb: 3, flexWrap: 'wrap', gap: 2 }}>
                 <TextField
                     label="Search"
                     value={query}
@@ -113,6 +116,6 @@ export default function Projects() {
                 title={videoTitle}
                 onClose={handleCloseVideo}
             />
-        </Box>
+        </Section>
     )
 }

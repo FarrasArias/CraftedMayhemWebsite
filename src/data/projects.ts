@@ -14,16 +14,30 @@ export type Project = {
     links?: { title: string, label: string; url: string }[]   
 }
 
+export const isGame = (p: Project) => p.tags.some((t) => t.toLowerCase() === 'game')
+
 export const projects: Project[] = [
     {
         client: 'Crafted Mayhem',
-        title: 'Cats Against the Machine',
-        year: 'Coming Soon (2026)',
-        //role: 'Game director',
-        summary: 'Tower defense game for PC, where you play as cats fighting against dumb AI robots. Emergent behaviours, generative world-building and multiple gameplay styles.',
-        tags: ['Game', 'Unity', '3D'],
+        title: 'Shutterbug Skies: Idle Camping',
+        year: 'Coming 2027',
+        summary: 'A cozy corner idler built to be your daily desktop companion. Help Kes search for and photograph 175+ bugs across 7 floating islands while you work, study, or relax, and upgrade your camera gear to complete the collection.',
+        tags: ['Game', '2D', 'Cozy', 'Idler'],
         status: 'current',
-        image: 'images/cats.png',
+        // Steam header capsule, hotlinked from Steam's CDN; swap for a local image in public/images if preferred
+        image: 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/5523830/935444f6544ab396630f94791fa67e2283b4396c/header.jpg',
+        links: [
+            { title: 'Shutterbug Skies: Idle Camping', label: 'Steam', url: 'https://store.steampowered.com/app/5523830/Shutterbug_Skies_Idle_Camping/' },
+        ],
+    },
+    {
+        // Placeholder card: fill in client, summary, tags, image and links
+        title: 'Yanga',
+        year: 'Current',
+        summary: 'Project details coming soon.',
+        tags: ['Industry'],
+        status: 'current',
+        image: 'images/placeholder-2.svg',
     },
     {
         client: 'iVizLab',

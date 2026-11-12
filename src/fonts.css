@@ -1,0 +1,12 @@
+/*
+ * Departure Mono v1.500 (SIL OFL 1.1, licence in assets/fonts/DepartureMono-LICENSE.txt)
+ * The brand guide's "special" typeface for labels, tags and numbers.
+ * Source: https://github.com/rektdeckard/departure-mono
+ */
+@font-face {
+  font-family: 'Departure Mono';
+  src: url('./assets/fonts/DepartureMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

@@ -5,22 +5,24 @@ import {
   Tabs, Tab, Stack, Link
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
+import CloseIcon from '@mui/icons-material/Close'
 import { Link as RouterLink, Routes, Route, useLocation } from 'react-router-dom'
 import Home from './pages/Home'
 import Games from './pages/Games'
 import Projects from './pages/Projects'
 import About from './pages/About'
 import Contact from './pages/Contact'
-import { asset } from './lib/assets'
-import ScrollToTop from './components/ScrollToTop'   // ⬅️ add this
-
+import ScrollToTop from './components/ScrollToTop'
+import Logo, { LogoSymbol } from './components/Logo'
+import SocialLinks from './components/SocialLinks'
+import { colors, fonts } from './brand'
 
 const nav = [
-  { label: 'Home', to: '/' },
-  { label: 'Projects', to: '/projects' },
-  { label: 'Games', to: '/games' },
-  { label: 'About', to: '/about' },
-  { label: 'Contact', to: '/contact' },
+  { label: 'home', to: '/' },
+  { label: 'games', to: '/games' },
+  { label: 'projects', to: '/projects' },
+  { label: 'about', to: '/about' },
+  { label: 'contact', to: '/contact' },
 ]
 
 function NavTabs() {
@@ -32,15 +34,8 @@ function NavTabs() {
       : location.pathname.startsWith(n.to)
   )
 
-  const value = active?.to ?? false
-
   return (
-    <Tabs
-      value={value}
-      textColor="inherit"
-      indicatorColor="secondary"
-      sx={{ ml: 2 }}
-    >
+    <Tabs value={active?.to ?? false} textColor="inherit">
       {nav.map(n => (
         <Tab
           key={n.to}
@@ -58,64 +53,61 @@ export default function App() {
   const [open, setOpen] = React.useState(false)
 
   return (
-    <Box
-      sx={{
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
-      {/* ⬇️ This runs its effect on every route change */}
+    <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <ScrollToTop />
 
-      <AppBar position="sticky" color="primary" enableColorOnDark>
-        <Toolbar sx={{ display: 'flex', gap: 2 }}>
-          <Typography
-            component={RouterLink}
-            to="/"
-            variant="h6"
-            sx={{
-              flexGrow: 1,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 1,
-              color: 'inherit',
-              textDecoration: 'none',
-              fontWeight: 900,
-            }}
-          >
-            <img
-              src={asset('images/logo.png')}
-              alt="Crafted Mayhem"
-              height="28"
-              style={{ borderRadius: 6 }}
-            />
-            Crafted Mayhem
-          </Typography>
+      <AppBar
+        position="sticky"
+        elevation={0}
+        sx={{ bgcolor: colors.onyx, color: colors.snow, borderBottom: `1px solid ${colors.grey5}` }}
+      >
+        <Container>
+          <Toolbar disableGutters sx={{ display: 'flex', gap: 2, minHeight: { xs: 60 } }}>
+            <Box
+              component={RouterLink}
+              to="/"
+              sx={{ flexGrow: 1, color: 'inherit', textDecoration: 'none', display: 'flex' }}
+            >
+              <Logo size={22} />
+            </Box>
 
-          {/* Desktop nav */}
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <NavTabs />
-          </Box>
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+              <NavTabs />
+            </Box>
 
-          {/* Mobile menu button */}
-          <IconButton
-            sx={{ display: { xs: 'flex', md: 'none' } }}
-            color="inherit"
-            onClick={() => setOpen(true)}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
+            <IconButton
+              sx={{ display: { xs: 'flex', md: 'none' } }}
+              color="inherit"
+              aria-label="Open menu"
+              onClick={() => setOpen(true)}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Toolbar>
+        </Container>
       </AppBar>
 
-      <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
-        <Box sx={{ width: 240 }} role="presentation" onClick={() => setOpen(false)}>
+      <Drawer
+        anchor="right"
+        open={open}
+        onClose={() => setOpen(false)}
+        PaperProps={{ sx: { bgcolor: colors.onyx, color: colors.snow, width: 260 } }}
+      >
+        <Box role="presentation" onClick={() => setOpen(false)}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', px: 2, py: 1.5 }}>
+            <LogoSymbol size={22} />
+            <IconButton color="inherit" aria-label="Close menu">
+              <CloseIcon />
+            </IconButton>
+          </Box>
           <List>
             {nav.map(n => (
               <ListItem key={n.to} disablePadding>
                 <ListItemButton component={RouterLink} to={n.to}>
-                  <ListItemText primary={n.label} />
+                  <ListItemText
+                    primary={n.label}
+                    primaryTypographyProps={{ fontFamily: fonts.mono }}
+                  />
                 </ListItemButton>
               </ListItem>
             ))}
@@ -123,7 +115,7 @@ export default function App() {
         </Box>
       </Drawer>
 
-      <Container sx={{ py: 6, flexGrow: 1 }}>
+      <Box component="main" sx={{ flexGrow: 1 }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
@@ -131,81 +123,48 @@ export default function App() {
           <Route path="/games" element={<Games />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
-      </Container>
+      </Box>
 
-      <Box
-        component="footer"
-        sx={{
-          mt: 'auto',
-          borderTop: '1px solid',
-          borderColor: 'divider',
-          bgcolor: 'grey.50',
-          py: 4,
-        }}
-      >
-        <Container
-          sx={{
-            display: 'flex',
-            flexDirection: { xs: 'column', md: 'row' },
-            alignItems: { xs: 'flex-start', md: 'center' },
-            justifyContent: 'space-between',
-            gap: 2,
-          }}
-        >
-          <Box>
-            <Typography variant="subtitle2" sx={{ fontWeight: 700 }}>
-              Crafted Mayhem Studio
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Apps, games & AI projects crafted with care.
-            </Typography>
-            <Typography
-              variant="caption"
-              color="text.secondary"
-              sx={{ mt: 1, display: 'block' }}
-            >
-              © {new Date().getFullYear()} Crafted Mayhem Studio. All rights reserved.
+      <Box component="footer" sx={{ bgcolor: colors.flame, color: colors.onyx, pt: { xs: 6, md: 8 }, pb: 4 }}>
+        <Container>
+          <SocialLinks />
+
+          <Stack
+            direction="row"
+            spacing={3}
+            sx={{ mt: { xs: 6, md: 10 }, flexWrap: 'wrap', fontFamily: fonts.mono }}
+          >
+            {nav.slice(1).map(n => (
+              <Link
+                key={n.to}
+                component={RouterLink}
+                to={n.to}
+                underline="hover"
+                color="inherit"
+                sx={{ fontFamily: fonts.mono, fontSize: '0.875rem' }}
+              >
+                {n.label}
+              </Link>
+            ))}
+          </Stack>
+
+          <Box
+            sx={{
+              mt: { xs: 6, md: 8 },
+              display: 'flex',
+              flexDirection: { xs: 'column', sm: 'row' },
+              alignItems: { xs: 'flex-start', sm: 'flex-end' },
+              justifyContent: 'space-between',
+              gap: 3,
+            }}
+          >
+            <Box sx={{ color: colors.snow }}>
+              <LogoSymbol size={44} title="Crafted Mayhem" />
+            </Box>
+            <Typography variant="caption">
+              Copyright © {new Date().getFullYear()} Crafted Mayhem Studio. All rights reserved.
             </Typography>
           </Box>
-
-          <Stack direction="row" spacing={3} sx={{ flexWrap: 'wrap' }}>
-            <Link
-              component={RouterLink}
-              to="/projects"
-              underline="hover"
-              color="inherit"
-              variant="body2"
-            >
-              Projects
-            </Link>
-            <Link
-              component={RouterLink}
-              to="/games"
-              underline="hover"
-              color="inherit"
-              variant="body2"
-            >
-              Games
-            </Link>
-            <Link
-              component={RouterLink}
-              to="/about"
-              underline="hover"
-              color="inherit"
-              variant="body2"
-            >
-              About
-            </Link>
-            <Link
-              component={RouterLink}
-              to="/contact"
-              underline="hover"
-              color="inherit"
-              variant="body2"
-            >
-              Contact
-            </Link>
-          </Stack>
         </Container>
       </Box>
     </Box>

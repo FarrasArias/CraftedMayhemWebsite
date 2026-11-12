@@ -1,5 +1,5 @@
 
-# Crafted Mayhem — Website
+# Crafted Mayhem Website
 
 React + Vite + TypeScript + Material UI (Material Design 3), optimized for GitHub Pages and mobile.
 
@@ -26,9 +26,9 @@ npm run dev
 - Add your `CNAME` file to `public/` or to the root of the gh-pages branch.
 
 ## Structure
-- `src/pages/*` — Home, Projects (with filter), About, Contact.
-- `src/data/projects.ts` — Project data you can edit.
-- Colors are set in `src/theme.ts` (`#8714fa` primary, `#f07d13` secondary).
+- `src/pages/*`: Home, Projects (with filter), Games, About, Contact.
+- `src/data/projects.ts`: project data you can edit.
+- Brand colours, fonts and social links live in `src/brand.ts`; `src/theme.ts` applies them to Material UI.
 
 ## Notes
 - HashRouter prevents 404s on GitHub Pages.
@@ -36,7 +36,7 @@ npm run dev
 
 
 ## Customize images & logo
-- Replace **public/images/logo.svg** with your logo (same name).
+- The logo is an inline SVG in `src/components/Logo.tsx`; the favicon is `public/favicon.svg`.
 - Replace image placeholders in **public/images/** and reference them in `src/data/projects.ts` and `src/data/team.ts`.
 
 ## Expandable projects
